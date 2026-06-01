@@ -92,12 +92,16 @@ final class AppContainer {
 
         // Let notification taps deep-link to the Map.
         notifs.container = self
+
+        // BG task handlers MUST be registered while the app is still launching — iOS throws an
+        // (uncatchable) exception if this happens after launch finishes, so it cannot be deferred
+        // to bootstrap(). init() runs from PiSkyApp's @State initializer, i.e. during launch.
+        registerBackgroundTask()
     }
 
     /// Request notification auth, load the saved config, and kick off live updates + telemetry.
     func bootstrap() async {
         await notifications.requestAuthorization()
-        registerBackgroundTask()
         let config = await connectionRepository.getConfig()
         aircraftRepository.startLiveUpdates(config: config)
         piVitals.startPolling()
