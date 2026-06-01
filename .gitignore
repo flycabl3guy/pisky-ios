@@ -1,0 +1,22 @@
+# Xcode / generated project
+*.xcodeproj
+*.xcworkspace
+xcuserdata/
+DerivedData/
+build/
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# SwiftPM
+.swiftpm/
+.build/
+Package.resolved
+
+# macOS
+.DS_Store
+
+# Secrets — never commit a signing team or provisioning profile
+*.mobileprovision
+*.p12
+ExportOptions.plist

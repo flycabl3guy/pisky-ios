@@ -1,0 +1,55 @@
+name: iOS build (unsigned IPA)
+
+# Cloud "compiler" for the Windows dev box: builds PiSky on a hosted macOS runner and uploads an
+# UNSIGNED .ipa. Install it on the iPhone from Windows with Sideloadly or AltStore (free Apple ID
+# re-signs it on the way to the device). First runs will surface Swift compile errors — read them in
+# the Actions log, fix in VS Code, push again.
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-14          # default Xcode 15.x → iOS 17 SDK (needed for @Observable + SwiftData)
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Toolchain versions
+        run: |
+          xcodebuild -version
+          swift --version
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate Xcode project
+        run: xcodegen generate
+
+      - name: Build unsigned archive (device)
+        run: |
+          xcodebuild \
+            -project PiSky.xcodeproj \
+            -scheme PiSky \
+            -configuration Release \
+            -sdk iphoneos \
+            -destination 'generic/platform=iOS' \
+            -archivePath "$RUNNER_TEMP/PiSky.xcarchive" \
+            clean archive \
+            CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+
+      - name: Package unsigned .ipa
+        run: |
+          APP="$RUNNER_TEMP/PiSky.xcarchive/Products/Applications/PiSky.app"
+          if [ ! -d "$APP" ]; then echo "No .app produced — build failed above"; exit 1; fi
+          mkdir -p "$RUNNER_TEMP/Payload"
+          cp -R "$APP" "$RUNNER_TEMP/Payload/"
+          ( cd "$RUNNER_TEMP" && zip -qry PiSky-unsigned.ipa Payload )
+
+      - name: Upload .ipa artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PiSky-unsigned-ipa
+          path: ${{ runner.temp }}/PiSky-unsigned.ipa
+          if-no-files-found: error
