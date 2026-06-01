@@ -1,0 +1,41 @@
+# Codemagic build config — free tier (500 macOS min/month, no credit card, works with a PRIVATE repo).
+# Morning setup: sign in at codemagic.io with GitHub -> Add application -> pick `pisky-ios` ->
+# it auto-detects this file -> Start build. Download the `PiSky-unsigned.ipa` artifact ->
+# install with Sideloadly. This sidesteps GitHub Actions billing entirely.
+
+workflows:
+  ios-unsigned:
+    name: PiSky unsigned iOS (.ipa for sideloading)
+    instance_type: mac_mini_m2
+    max_build_duration: 60
+    environment:
+      xcode: latest
+      vars:
+        XCODE_PROJECT: "PiSky.xcodeproj"
+        XCODE_SCHEME: "PiSky"
+    scripts:
+      - name: Install XcodeGen
+        script: brew install xcodegen
+      - name: Generate Xcode project
+        script: xcodegen generate
+      - name: Build unsigned archive (device)
+        script: |
+          xcodebuild \
+            -project "$XCODE_PROJECT" \
+            -scheme "$XCODE_SCHEME" \
+            -configuration Release \
+            -sdk iphoneos \
+            -destination 'generic/platform=iOS' \
+            -archivePath "$CM_BUILD_DIR/PiSky.xcarchive" \
+            clean archive \
+            CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+      - name: Package unsigned .ipa
+        script: |
+          APP="$CM_BUILD_DIR/PiSky.xcarchive/Products/Applications/PiSky.app"
+          if [ ! -d "$APP" ]; then echo "No .app produced - build failed above"; exit 1; fi
+          mkdir -p "$CM_BUILD_DIR/Payload"
+          cp -R "$APP" "$CM_BUILD_DIR/Payload/"
+          ( cd "$CM_BUILD_DIR" && zip -qry PiSky-unsigned.ipa Payload )
+    artifacts:
+      - $CM_BUILD_DIR/PiSky-unsigned.ipa
+      - /tmp/xcodebuild_logs/*.log
