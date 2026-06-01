@@ -1,3 +1,34 @@
 ﻿PiSky iOS build failure
-run: https://github.com/ewatts104-bit/pisky-ios/actions/runs/26736691306
+run: https://github.com/flycabl3guy/pisky-ios/actions/runs/26737250088
 ================================
+build	Build unsigned archive (device)	∩╗┐2026-06-01T05:38:02.1587260Z ##[group]Run xcodebuild \
+build	Build unsigned archive (device)	2026-06-01T05:38:02.1587480Z ^[[36;1mxcodebuild \^[[0m
+build	Build unsigned archive (device)	2026-06-01T05:38:02.1587700Z ^[[36;1m  -project PiSky.xcodeproj \^[[0m
+build	Build unsigned archive (device)	2026-06-01T05:38:02.1587990Z ^[[36;1m  -scheme PiSky \^[[0m
+build	Build unsigned archive (device)	2026-06-01T05:38:02.1588260Z ^[[36;1m  -configuration Release \^[[0m
+build	Build unsigned archive (device)	2026-06-01T05:38:02.1588470Z ^[[36;1m  -sdk iphoneos \^[[0m
+build	Build unsigned archive (device)	2026-06-01T05:38:02.1588680Z ^[[36;1m  -destination 'generic/platform=iOS' \^[[0m
+build	Build unsigned archive (device)	2026-06-01T05:38:02.1588960Z ^[[36;1m  -archivePath "$RUNNER_TEMP/PiSky.xcarchive" \^[[0m
+build	Build unsigned archive (device)	2026-06-01T05:38:02.1589210Z ^[[36;1m  clean archive \^[[0m
+build	Build unsigned archive (device)	2026-06-01T05:38:02.1589530Z ^[[36;1m  CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO^[[0m
+build	Build unsigned archive (device)	2026-06-01T05:38:02.1640190Z shell: /bin/bash -e {0}
+build	Build unsigned archive (device)	2026-06-01T05:38:02.1640410Z ##[endgroup]
+build	Build unsigned archive (device)	2026-06-01T05:38:03.0294500Z Command line invocation:
+build	Build unsigned archive (device)	2026-06-01T05:38:03.0296800Z     /Applications/Xcode_15.4.app/Contents/Developer/usr/bin/xcodebuild -project PiSky.xcodeproj -scheme PiSky -configuration Release -sdk iphoneos -destination generic/platform=iOS -archivePath /Users/runner/work/_temp/PiSky.xcarchive clean archive CODE_SIGN_IDENTITY= CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+build	Build unsigned archive (device)	2026-06-01T05:38:03.0298140Z 
+build	Build unsigned archive (device)	2026-06-01T05:38:03.0298260Z User defaults from command line:
+build	Build unsigned archive (device)	2026-06-01T05:38:03.0298630Z     IDEArchivePathOverride = /Users/runner/work/_temp/PiSky.xcarchive
+build	Build unsigned archive (device)	2026-06-01T05:38:03.0299010Z     IDEPackageSupportUseBuiltinSCM = YES
+build	Build unsigned archive (device)	2026-06-01T05:38:03.0299190Z 
+build	Build unsigned archive (device)	2026-06-01T05:38:03.0299350Z Build settings from command line:
+build	Build unsigned archive (device)	2026-06-01T05:38:03.0299600Z     CODE_SIGN_IDENTITY = 
+build	Build unsigned archive (device)	2026-06-01T05:38:03.0299820Z     CODE_SIGNING_ALLOWED = NO
+build	Build unsigned archive (device)	2026-06-01T05:38:03.0300040Z     CODE_SIGNING_REQUIRED = NO
+build	Build unsigned archive (device)	2026-06-01T05:38:03.0300240Z     SDKROOT = iphoneos17.5
+build	Build unsigned archive (device)	2026-06-01T05:38:03.0300390Z 
+build	Build unsigned archive (device)	2026-06-01T05:38:03.7787030Z 2026-06-01 05:38:03.778 xcodebuild[5129:17317] Writing error result bundle to /var/folders/y8/mxm23y3s6m38f6r8d1pbqz600000gn/T/ResultBundle_2026-01-06_05-38-0003.xcresult
+build	Build unsigned archive (device)	2026-06-01T05:38:05.2833300Z xcodebuild: error: Unable to read project 'PiSky.xcodeproj'.
+build	Build unsigned archive (device)	2026-06-01T05:38:05.2835580Z 	Reason: The project ΓÇÿPiSkyΓÇÖ cannot be opened because it is in a future Xcode project file format (77). Adjust the project format using a compatible version of Xcode to allow it to be opened by this version of Xcode.
+build	Build unsigned archive (device)	2026-06-01T05:38:05.2839550Z 
+build	Build unsigned archive (device)	2026-06-01T05:38:05.2839550Z 
+build	Build unsigned archive (device)	2026-06-01T05:38:05.2951990Z ##[error]Process completed with exit code 74.

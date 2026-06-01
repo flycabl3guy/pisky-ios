@@ -109,9 +109,9 @@ final class AppContainer {
         switch phase {
         case .active:
             Task {
-                let config = await connectionRepository.getConfig()
-                aircraftRepository.startLiveUpdates(config: config)
-                piVitals.startPolling()
+                let config = await self.connectionRepository.getConfig()
+                self.aircraftRepository.startLiveUpdates(config: config)
+                self.piVitals.startPolling()
             }
         case .background:
             aircraftRepository.stopLiveUpdates()
@@ -142,7 +142,7 @@ final class AppContainer {
         // Re-schedule the next occurrence immediately so the chain continues.
         scheduleHourlyTally()
         let work = Task {
-            await runHourlyTally()
+            await self.runHourlyTally()
             task.setTaskCompleted(success: true)
         }
         task.expirationHandler = { work.cancel() }

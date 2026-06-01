@@ -58,9 +58,9 @@ final class AircraftRepositoryImpl: AircraftRepository {
         self.prefs = prefs
         self.aircraftTypes = aircraftTypes
         self.notifications = notifications
-        Task {
-            await refreshFavorites()
-            await refreshDailyObservers()
+        Task { [weak self] in
+            await self?.refreshFavorites()
+            await self?.refreshDailyObservers()
         }
     }
 

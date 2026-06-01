@@ -12,7 +12,7 @@ on:
 
 jobs:
   build:
-    runs-on: macos-14          # default Xcode 15.x → iOS 17 SDK (needed for @Observable + SwiftData)
+    runs-on: macos-15          # default Xcode 15.x → iOS 17 SDK (needed for @Observable + SwiftData)
     steps:
       - uses: actions/checkout@v4
 

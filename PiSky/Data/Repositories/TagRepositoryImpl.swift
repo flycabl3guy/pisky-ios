@@ -14,7 +14,7 @@ final class TagRepositoryImpl: TagRepository {
 
     init(store: PersistenceStore) {
         self.store = store
-        Task { await refresh() }
+        Task { [weak self] in await self?.refresh() }
     }
 
     func observeAll() -> AnyPublisher<[AircraftTag], Never> { allSubject.eraseToAnyPublisher() }

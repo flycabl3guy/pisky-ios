@@ -13,7 +13,7 @@ final class ConnectionRepositoryImpl: ConnectionRepository {
         self.store = store
     }
 
-    private func migrate(_ c: ConnectionConfig) -> ConnectionConfig {
+    private nonisolated func migrate(_ c: ConnectionConfig) -> ConnectionConfig {
         let stale = (c.hostname == "192.168.1.54" && c.port == 80)
                  || (c.hostname == "192.168.1.207" && c.port == 8000)
         guard stale else { return c }
