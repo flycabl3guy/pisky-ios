@@ -350,8 +350,8 @@ struct TelemetryGauge: View {
         }
         // needle
         let needleAngle = (startAngle + activeSweep) * .pi / 180
-        let tip = CGPoint(x: cx + r * 0.92 * cos(needleAngle), y: cy + r * 0.92 * sin(needleAngle))
-        let base = CGPoint(x: cx + r * 0.18 * cos(needleAngle + .pi), y: cy + r * 0.18 * sin(needleAngle + .pi))
+        let tip = CGPoint(x: cx + r * 0.92 * CGFloat(cos(Double(needleAngle))), y: cy + r * 0.92 * CGFloat(sin(Double(needleAngle))))
+        let base = CGPoint(x: cx + r * 0.18 * CGFloat(cos(Double(needleAngle + .pi))), y: cy + r * 0.18 * CGFloat(sin(Double(needleAngle + .pi))))
         var needle = Path(); needle.move(to: base); needle.addLine(to: tip)
         ctx.stroke(needle, with: .color(needleColor), style: StrokeStyle(lineWidth: stroke * 0.45, lineCap: .round))
         // hub

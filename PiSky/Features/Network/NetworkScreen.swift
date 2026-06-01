@@ -71,7 +71,7 @@ struct NetworkScreen: View {
                     HStack {
                         BigStat(value: outRate.map { humanBytesRate($0) } ?? "—", label: "uplink rate", accent: Palette.cyan)
                         Spacer()
-                        BigStat(value: vm.stats?.last1min?.messagesValid.map { Fmt.grouped($0) } ?? "—",
+                        BigStat(value: (vm.stats?.last1min?.messagesValid).map { Fmt.grouped($0) } ?? "—",
                                 label: "msgs / min", valueColor: Palette.textPrimary, accent: Palette.brass)
                     }
                     Spacer().frame(height: 12)

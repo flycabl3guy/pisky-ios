@@ -27,10 +27,8 @@ struct IntegrityScreen: View {
         let v0 = aircraft.filter { $0.version == 0 }.count
         let v1 = aircraft.filter { $0.version == 1 }.count
         let v2 = aircraft.filter { $0.version == 2 }.count
-        var nacpHist = [Int](repeating: 0, count: 12)
-        for ac in reporting { if let v = ac.nacP, (0...11).contains(v) { nacpHist[v] += 1 } }
-        var nicHist = [Int](repeating: 0, count: 12)
-        for ac in reporting { if let v = ac.nic, (0...11).contains(v) { nicHist[v] += 1 } }
+        let nacpHist = (0...11).map { code in reporting.filter { $0.nacP == code }.count }
+        let nicHist = (0...11).map { code in reporting.filter { $0.nic == code }.count }
         let sil0 = aircraft.filter { $0.sil == 0 }.count
         let sil1 = aircraft.filter { $0.sil == 1 }.count
         let sil2 = aircraft.filter { $0.sil == 2 }.count

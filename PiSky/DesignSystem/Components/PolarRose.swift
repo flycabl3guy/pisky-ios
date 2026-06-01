@@ -73,7 +73,7 @@ struct PolarRose: View {
                 func pt(_ p: RosePoint) -> CGPoint {
                     let a = deg2radPR(p.bearingDeg - 90)
                     let r = maxR * CGFloat(Swift.min(Swift.max(p.rangeFraction, 0), 1))
-                    return CGPoint(x: cx + r * cos(a), y: cy + r * sin(a))
+                    return CGPoint(x: cx + r * CGFloat(cos(Double(a))), y: cy + r * CGFloat(sin(Double(a))))
                 }
                 var poly = Path()
                 for (i, p) in sorted.enumerated() {
@@ -96,7 +96,7 @@ struct PolarRose: View {
             for p in liveDots {
                 let a = deg2radPR(p.bearingDeg - 90)
                 let r = maxR * CGFloat(Swift.min(Swift.max(p.rangeFraction, 0), 1))
-                let o = CGPoint(x: cx + r * cos(a), y: cy + r * sin(a))
+                let o = CGPoint(x: cx + r * CGFloat(cos(Double(a))), y: cy + r * CGFloat(sin(Double(a))))
                 ctx.fill(circlePath(center: o, r: 5), with: .color(p.color.opacity(0.30)))
                 ctx.fill(circlePath(center: o, r: 2.6), with: .color(p.color))
             }

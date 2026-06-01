@@ -42,8 +42,8 @@ final class PiVitalsRepository {
     var statsError:  AnyPublisher<String?, Never>             { statsErrorSubject.eraseToAnyPublisher() }
 
     // Receiver coords for projecting the coverage polygon to bearing/range.
-    private var recvLat = Self.cowdenLat
-    private var recvLon = Self.cowdenLon
+    private var recvLat = PiVitalsRepository.cowdenLat
+    private var recvLon = PiVitalsRepository.cowdenLon
 
     private var started = false
     private var tasks: [Task<Void, Never>] = []

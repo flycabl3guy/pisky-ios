@@ -87,7 +87,7 @@ struct StatPlate: View {
     var valueColor: Color = Palette.textPrimary
 
     var body: some View {
-        HangarPlate(contentPadding: 12, tint: accent.opacity(0.5)) {
+        HangarPlate(tint: accent.opacity(0.5), contentPadding: 12) {
             VStack(alignment: .leading, spacing: 0) {
                 Text(label.uppercased())
                     .font(.inter(10, weight: .medium))

@@ -241,11 +241,11 @@ struct BoxPlotH: View {
                 Text("distribution unavailable")
                     .font(.inter(12)).foregroundStyle(Palette.textMuted)
             } else {
-                let span = Swift.max(axisMax - axisMin, 1e-3)
-                func fx(_ v: Double) -> CGFloat {
-                    CGFloat(Swift.min(Swift.max((Float(v) - axisMin) / span, 0), 1))
-                }
                 Canvas { ctx, size in
+                    let span = Swift.max(axisMax - axisMin, 1e-3)
+                    func fx(_ v: Double) -> CGFloat {
+                        CGFloat(Swift.min(Swift.max((Float(v) - axisMin) / span, 0), 1))
+                    }
                     let w = size.width, midY = size.height / 2
                     // axis
                     var axis = Path(); axis.move(to: CGPoint(x: 0, y: midY)); axis.addLine(to: CGPoint(x: w, y: midY))

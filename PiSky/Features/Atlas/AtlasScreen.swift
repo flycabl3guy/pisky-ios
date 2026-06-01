@@ -135,7 +135,7 @@ struct AtlasScreen: View {
             HangarHaptics.tap()
             onNavigate(t.route)
         } label: {
-            HangarPlate(contentPadding: 12, tint: t.accent.opacity(0.4)) {
+            HangarPlate(tint: t.accent.opacity(0.4), contentPadding: 12) {
                 VStack(alignment: .leading, spacing: 0) {
                     HStack(spacing: 7) {
                         Image(systemName: t.icon)
